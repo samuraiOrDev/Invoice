@@ -1,0 +1,7 @@
+input {
+  color: #fff !important;
+}
+.custom-input-adornment {
+  color: green !important;
+  /* Otros estilos personalizados */
+}
