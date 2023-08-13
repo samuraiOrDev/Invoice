@@ -12,6 +12,7 @@ import { useContext } from "react";
 import { InvoiceContext } from "./context/InvoiceContext";
 
 export const InvoiceApp = () => {
+  const { activeForm } = useContext(InvoiceContext);
   const { invoice, items, total } = useContext(InvoiceContext);
   if (!invoice) return <div>Cargando...</div>;
 
@@ -45,7 +46,7 @@ export const InvoiceApp = () => {
         </Box>
         <ListItemsView items={items} />
         <TotalView total={total} />
-        <FormView />
+        {activeForm ? <FormView /> : " "}
       </Box>
     </Container>
   );

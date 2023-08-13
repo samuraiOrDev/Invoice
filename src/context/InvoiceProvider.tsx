@@ -20,6 +20,8 @@ export const InvoiceProvider: FC<Props> = ({ children }) => {
     quantity: 0,
   });
   const [total, setTotal] = useState(0);
+  const [activeForm, setActiveForm] = useState(false);
+  const handleChaneViewForm = () => setActiveForm((state) => !state);
   //Funciones Form
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -66,6 +68,16 @@ export const InvoiceProvider: FC<Props> = ({ children }) => {
       return;
     }
   };
+  const handleDeleteItem = (id: string) => {
+    const newItems = items?.filter((item) => {
+      if (item.product != id) {
+        return item;
+      } else {
+        setTotal(total - item.price);
+      }
+    });
+    setItems(newItems);
+  };
   useEffect(() => {
     const response = getInvoice();
     const initialValueTotal = response.items
@@ -88,6 +100,9 @@ export const InvoiceProvider: FC<Props> = ({ children }) => {
         validateForm,
         handleSubmit,
         total,
+        activeForm,
+        handleChaneViewForm,
+        handleDeleteItem,
       }}
     >
       {children}

@@ -44,4 +44,7 @@ export interface TypeInvoiceContext {
   validateForm: () => boolean;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   total: number;
+  activeForm: boolean;
+  handleChaneViewForm: () => void;
+  handleDeleteItem: (id: string) => void;
 }

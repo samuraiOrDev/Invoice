@@ -10,14 +10,13 @@ import {
 } from "@mui/material";
 import { FC } from "react";
 import { Item } from "../../context/interface-invoice";
+import { Delete } from "../ui";
 
 interface Props {
   items: Item[] | undefined;
 }
 export const ListItemsView: FC<Props> = ({ items }) => {
   if (!items) return <div>Cargando...</div>;
-
-  const keys = Object.keys(items[0]);
   return (
     <>
       <Typography variant="h3" sx={{ marginBottom: "5px", color: "#efb810" }}>
@@ -34,11 +33,18 @@ export const ListItemsView: FC<Props> = ({ items }) => {
         >
           <TableHead sx={{ bgcolor: "#333", color: "#efb810" }}>
             <TableRow>
-              {keys.map((key) => (
-                <TableCell key={key} sx={{ color: "#efb810" }}>
-                  {key.toUpperCase()}
-                </TableCell>
-              ))}
+              <TableCell sx={{ color: "#efb810", textTransform: "uppercase" }}>
+                Product
+              </TableCell>
+              <TableCell sx={{ color: "#efb810", textTransform: "uppercase" }}>
+                Price
+              </TableCell>
+              <TableCell sx={{ color: "#efb810", textTransform: "uppercase" }}>
+                Quantity
+              </TableCell>
+              <TableCell sx={{ color: "#efb810", textTransform: "uppercase" }}>
+                Actions
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -56,6 +62,9 @@ export const ListItemsView: FC<Props> = ({ items }) => {
                 </TableCell>
                 <TableCell align="left" sx={{ color: "#fff" }}>
                   {item.quantity}
+                </TableCell>
+                <TableCell align="left" sx={{ color: "#fff" }}>
+                  <Delete id={item.product} />
                 </TableCell>
               </TableRow>
             ))}
